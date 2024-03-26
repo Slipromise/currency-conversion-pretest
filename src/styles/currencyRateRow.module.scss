@@ -1,0 +1,18 @@
+.container {
+    vertical-align: middle;
+    font-size: 1.2rem;
+    height: 2em;
+
+    >td:first-child {
+        img {
+            width: 2em;
+            aspect-ratio: 1;
+            margin: 0 .2em;
+        }
+    }
+
+    >td:last-child,
+    >th:last-child {
+        text-align: right;
+    }
+}

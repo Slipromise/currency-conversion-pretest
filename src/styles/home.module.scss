@@ -1,0 +1,45 @@
+.container {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 768px;
+
+    .header {
+        padding: .4em;
+
+        h1 {
+            text-align: center;
+        }
+    }
+
+
+
+    .body {
+        flex: 1;
+        overflow: scroll;
+
+        table {
+
+            thead {
+                position: sticky;
+                top: 0;
+                z-index: 1;
+            }
+
+            tbody {
+                tr:focus>* {
+                    --bs-table-bg-state: var(--bs-primary)
+                }
+            }
+        }
+
+    }
+
+    .footer {
+        justify-content: center;
+        padding: .4em;
+        display: flex;
+    }
+
+}
