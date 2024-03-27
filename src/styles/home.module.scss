@@ -27,11 +27,7 @@
                 z-index: 1;
             }
 
-            tbody {
-                tr:focus>* {
-                    --bs-table-bg-state: var(--bs-primary)
-                }
-            }
+
         }
 
     }

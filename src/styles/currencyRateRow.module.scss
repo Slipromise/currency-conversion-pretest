@@ -15,4 +15,11 @@
     >th:last-child {
         text-align: right;
     }
+
+    &[data-is-selected="true"] {
+        >* {
+            background-color: var(--bs-primary);
+        }
+
+    }
 }

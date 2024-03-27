@@ -94,7 +94,6 @@ const CurrencyConversionCard = ({
           type="number"
           value={numeral(fromValue).format(fromFormatter, Math.floor)}
           onChange={(e) => onChangeFromValue(e.target.value)}
-          step={0.001}
         />
       </CardHeader>
       <CardBody>
@@ -111,8 +110,8 @@ const CurrencyConversionCard = ({
         )} ${toLabel}`}</span>
       </CardBody>
       <CardFooter>
-        <Button variant="outline-primary">
-          <Image src={toIcon} alt="" onClick={onClickTo} />
+        <Button variant="outline-primary" onClick={onClickTo}>
+          <Image src={toIcon} alt="" />
           {toLabel}
           <FaAngleDown />
         </Button>

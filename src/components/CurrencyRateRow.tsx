@@ -6,19 +6,18 @@ type Props = {
   icon: string;
   title: string;
   price: number;
-  onFocus?: () => void;
-  onBlur?: () => void;
+  onClick?: () => void;
+  isSelected?: boolean;
 };
 
 // TODO: number animation
 
-function CurrencyRateRow({ icon, title, price, onBlur, onFocus }: Props) {
+function CurrencyRateRow({ icon, title, price, onClick, isSelected }: Props) {
   return (
     <tr
       className={styles.container}
-      onFocus={onFocus}
-      onBlur={onBlur}
-      tabIndex={0}
+      onClick={onClick}
+      data-is-selected={isSelected}
     >
       <td>
         <Image src={icon} alt="" />

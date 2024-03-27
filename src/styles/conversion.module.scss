@@ -1,0 +1,18 @@
+.container {
+    max-width: 768px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        position: relative;
+
+        .close-icon {
+            font-size: 2em;
+            position: absolute;
+            right: -1.3em;
+            top: calc(50% - .5em)
+        }
+    }
+
+}

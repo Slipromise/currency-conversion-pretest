@@ -6,4 +6,9 @@
         aspect-ratio: 1;
         margin: 0 .3em;
     }
+
+    &[data-is-selected="true"] {
+        background-color: var(--bs-primary);
+        color: var(--bs-white);
+    }
 }
