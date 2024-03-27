@@ -1,0 +1,55 @@
+.container {
+    max-width: 375px;
+
+    >*:first-child {
+        padding-bottom: 1.5em;
+    }
+
+    >*:last-child {
+        padding-top: 1.5em;
+    }
+
+    :global(.card-body) {
+        align-items: start;
+        display: flex;
+        flex-direction: row;
+        /* align-content: center; */
+        justify-content: space-evenly;
+        position: relative;
+        height: 0;
+        padding: 0;
+
+        top: -1.1em;
+
+        >button {
+            border-radius: 50%;
+        }
+
+    }
+
+    :global(.card-header),
+    :global(.card-footer) {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        >input {
+            text-align: right;
+        }
+
+        > :global(.btn) {
+            border-radius: 3em;
+
+            img {
+                width: 1.5em;
+                aspect-ratio: 1;
+                margin: 0 0.2em;
+            }
+        }
+
+
+    }
+
+
+}
