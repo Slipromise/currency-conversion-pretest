@@ -6,6 +6,7 @@ import { Container, ListGroup } from "react-bootstrap";
 import styles from "@/styles/selection.module.scss";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IoMdClose } from "react-icons/io";
+import { Suspense } from "react";
 
 type Props = {};
 
@@ -33,8 +34,7 @@ function Selection({}: Props) {
   const fixData = useMemo(
     () =>
       data?.filter(
-        ({ title }) =>
-          !searchParams.has("to", title) && !searchParams.has("from", title)
+        ({ id }) => !searchParams.has("to", id) && !searchParams.has("from", id)
       ),
     [data, searchParams]
   );
@@ -42,14 +42,14 @@ function Selection({}: Props) {
   const router = useRouter();
 
   const onClickItem = useCallback(
-    (currency: string) => {
+    (id: string) => {
       // TODO: 待優化
       // router.back();
 
       router.replace(
         `/conversion/${
-          searchParams.has("from") ? searchParams.get("from") : currency
-        }/${searchParams.has("to") ? searchParams.get("to") : currency}`
+          searchParams.has("from") ? searchParams.get("from") : id
+        }/${searchParams.has("to") ? searchParams.get("to") : id}`
       );
     },
     [router, searchParams]
@@ -66,8 +66,8 @@ function Selection({}: Props) {
           <CurrencySelectListItem
             key={id}
             {...props}
-            isSelected={searchParams.has("selected", props.title)}
-            onClick={() => onClickItem(props.title)}
+            isSelected={searchParams.has("selected", id)}
+            onClick={() => onClickItem(id)}
           />
         ))}
       </ListGroup>
@@ -75,4 +75,11 @@ function Selection({}: Props) {
   );
 }
 
-export default Selection;
+// TODO: 釐清https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+const WarpedSelection = () => (
+  <Suspense>
+    <Selection></Selection>
+  </Suspense>
+);
+
+export default WarpedSelection;

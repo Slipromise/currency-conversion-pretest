@@ -41,13 +41,13 @@ function Conversion({}: Props) {
       return undefined;
     }
 
-    const currencies = param.slug;
+    const ids = param.slug;
 
-    const from = data.find(({ currency }) => currency === currencies[0]);
+    const from = data.find(({ id }) => id === ids[0]);
 
-    const to = data.find(({ currency }) => currency === currencies[1]);
+    const to = data.find(({ id }) => id === ids[1]);
 
-    if (currencies[0] === currencies[1]) {
+    if (ids[0] === ids[1]) {
       return undefined;
     }
 
@@ -68,18 +68,20 @@ function Conversion({}: Props) {
         router.push(
           queryString.stringifyUrl({
             url: "/selection",
-            query: { to: to.currency, selected: from.currency },
+            query: { to: to.id, selected: from.id },
           })
         ),
       onClickTo: () =>
         router.push(
           queryString.stringifyUrl({
             url: "/selection",
-            query: { from: from.currency, selected: to.currency },
+            query: { from: from.id, selected: to.id },
           })
         ),
       onSwap: () => {
-        router.push("https://github.com/Slipromise");
+        router.push(
+          "https://github.com/Slipromise/currency-conversion-pretest"
+        );
       },
     };
   }, [data, param.slug, router]);

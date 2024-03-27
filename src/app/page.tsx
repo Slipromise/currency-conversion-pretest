@@ -10,7 +10,7 @@ import { ComponentProps, useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const [selectCurrencies, setSelectCurrencies] = useState<string[]>(() => []);
+  const [selectIDs, setIDs] = useState<string[]>(() => []);
 
   const { data } = usePairsQuery(
     {},
@@ -21,28 +21,26 @@ export default function Home() {
           resp.data?.map<
             ComponentProps<typeof CurrencyRateRow> & {
               id: string;
-              currency: string;
             }
           >((item) => ({
             icon: item.currency_icon,
             title: `${item.currency}/TWD`,
             price: item.twd_price,
             id: item.id,
-            currency: item.currency,
           })) || [],
       }),
     }
   );
 
   const router = useRouter();
-  const onRowClick = useCallback((currency: string) => {
-    setSelectCurrencies((pre) => {
-      if (pre.includes(currency)) {
+  const onRowClick = useCallback((id: string) => {
+    setIDs((pre) => {
+      if (pre.includes(id)) {
         return pre;
       } else if (pre.length < 2) {
-        return [...pre, currency];
+        return [...pre, id];
       } else {
-        return [pre[1], currency];
+        return [pre[1], id];
       }
     });
   }, []);
@@ -58,12 +56,12 @@ export default function Home() {
             <CurrencyRateHeader />
           </thead>
           <tbody>
-            {data.map(({ id, currency, ...props }) => (
+            {data.map(({ id, ...props }) => (
               <CurrencyRateRow
                 key={id}
                 {...props}
-                onClick={() => onRowClick(currency)}
-                isSelected={selectCurrencies.includes(currency)}
+                onClick={() => onRowClick(id)}
+                isSelected={selectIDs.includes(id)}
               />
             ))}
           </tbody>
@@ -71,10 +69,8 @@ export default function Home() {
       </div>
       <div className={styles.footer}>
         <Button
-          disabled={selectCurrencies.length < 2}
-          onClick={() =>
-            router.push(`/conversion/${selectCurrencies.join("/")}`)
-          }
+          disabled={selectIDs.length < 2}
+          onClick={() => router.push(`/conversion/${selectIDs.join("/")}`)}
         >
           Rate Conversion
         </Button>
